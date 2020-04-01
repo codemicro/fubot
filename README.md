@@ -15,7 +15,7 @@ This script requires Python 3.6 or later.
 * Setup a Discord bot user.
 * Put the bot token in a file called `token` in the same directory as `bot.py`.
 * Put the Discord channel IDs you want this bot to be active in in a list as the `channels` variable. They should be integers.
-* Run bot.py
+* Run `bot.py`
 * Watch the hilarity ensue.
 
 ## Issues?
