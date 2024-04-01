@@ -47,7 +47,7 @@ async def on_message(msg):
     if str(msg.channel.id) != CONF.get("channelID"):
         return
 
-    if random.randint(1, 75) != 1:
+    if random.randint(1, 150) != 1:
         return
 
     try:
