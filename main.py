@@ -28,7 +28,7 @@ def translate_string(en_txt: str) -> str:
 def get_max_prob() -> int:
     end = int((datetime.date.today() + datetime.timedelta(days=1)).strftime("%s"))
     remaining = end - int((datetime.datetime.utcnow()).strftime("%s"))
-    return (int(90*(remaining/5184000))) + 10
+    return (int(90*(remaining/86400))) + 10
 
 
 @bot.event
