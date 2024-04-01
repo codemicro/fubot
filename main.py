@@ -4,6 +4,7 @@ import urllib.parse
 import sys
 import requests
 import random
+import datetime
 
 CONF = json.load(open("config.json"))
 bot = discord.Bot(intents=discord.Intents.all())
@@ -24,6 +25,12 @@ def translate_string(en_txt: str) -> str:
     return j[0][0][0]  # lol
 
 
+def get_max_prob() -> int:
+    end = int((datetime.date.today() + datetime.timedelta(days=1)).strftime("%s"))
+    remaining = end - int((datetime.datetime.utcnow()).strftime("%s"))
+    return (int(90*(remaining/5184000))) + 10
+
+
 @bot.event
 async def on_ready():
     print(f"{bot.user} is ready and online!")
@@ -31,13 +38,13 @@ async def on_ready():
 
 @bot.event
 async def on_message(msg):
-    if str(msg.channel.id) != CONF.get("channelID"):
+    if not((td := datetime.date.today()).day == 1 and td.month == 4):
         return
 
     if msg.author.id == bot.user.id:
         return
 
-    if random.randint(1, 50) != 13:
+    if random.randint(1, get_max_prob()) != 2:
         return
 
     try:
