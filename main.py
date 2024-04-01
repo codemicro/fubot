@@ -28,7 +28,7 @@ def translate_string(en_txt: str) -> str:
 def get_max_prob() -> int:
     end = int((datetime.date.today() + datetime.timedelta(days=1)).strftime("%s"))
     remaining = end - int((datetime.datetime.utcnow()).strftime("%s"))
-    return (int(90*(remaining/86400))) + 10
+    return (int(24*(remaining/86400))) + 1
 
 
 @bot.event
@@ -41,14 +41,14 @@ async def on_message(msg):
     if not((td := datetime.date.today()).day == 1 and td.month == 4):
         return
 
-    if msg.author.id == bot.user.id:
+    if msg.author.id == bot.user.id or msg.author.id == 572694800365518849:
         return
 
-    if random.randint(1, get_max_prob()) != 2:
+    if random.randint(1, get_max_prob()) != 1:
         return
 
     try:
-        await msg.reply(translate_string(msg.content))
+        await msg.reply(translate_string(("".join(reversed(msg.content))) if random.randint(1, 50) == 3 else msg.content))
     except Exception as e:
         # :(
         print("Error: " + e, file=sys.stderr)
