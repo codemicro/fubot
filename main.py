@@ -25,10 +25,10 @@ def translate_string(en_txt: str) -> str:
     return j[0][0][0]  # lol
 
 
-def get_max_prob() -> int:
-    end = int((datetime.date.today() + datetime.timedelta(days=1)).strftime("%s"))
-    remaining = end - int((datetime.datetime.utcnow()).strftime("%s"))
-    return (int(24*(remaining/86400))) + 1
+#def get_max_prob() -> int:
+#    end = int((datetime.date.today() + datetime.timedelta(days=1)).strftime("%s"))
+#    remaining = end - int((datetime.datetime.utcnow()).strftime("%s"))
+#    return (int(24*(remaining/86400))) + 1
 
 
 @bot.event
@@ -38,14 +38,17 @@ async def on_ready():
 
 @bot.event
 async def on_message(msg):
-    if not((td := datetime.date.today()).day == 1 and td.month == 4):
-        return
-
     if msg.author.id == bot.user.id or msg.author.id == 572694800365518849:
         return
 
-    if random.randint(1, get_max_prob()) != 1:
+    #if random.randint(1, get_max_prob()) != 1:
+    #    return
+
+    if str(msg.channel.id) != CONF.get("channelID"):
         return
+
+    if random.randint(1, 75) != 1:
+	return
 
     try:
         await msg.reply(translate_string(("".join(reversed(msg.content))) if random.randint(1, 50) == 3 else msg.content))
